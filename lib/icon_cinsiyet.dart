@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yasam_dong/constants.dart';
 
 class IconCinsiyet extends StatelessWidget {
   final String? cinsiyet;
@@ -19,11 +20,8 @@ class IconCinsiyet extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
-        Text(
-          cinsiyet!, //! ile null kontrolü yapıyor
-          style: TextStyle(
-              color: Colors.black54, fontSize: 20, fontWeight: FontWeight.bold),
-        )
+        Text(cinsiyet!, //! ile null kontrolü yapıyor
+            style: kMetinStili)
       ],
     );
   }
