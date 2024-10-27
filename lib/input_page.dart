@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:yasam_dong/constants.dart';
+import 'package:yasam_dong/result_page.dart';
+import 'package:yasam_dong/user_data.dart';
 import 'icon_cinsiyet.dart';
 import 'my_container.dart';
 
@@ -14,7 +16,7 @@ class _InputPageState extends State<InputPage> {
   double icilenSigara = 0;
   double yapilanSpor = 0;
   int boy = 170;
-  double kilo = 65;
+  int kilo = 65;
 
   @override
   Widget build(BuildContext context) {
@@ -36,138 +38,13 @@ class _InputPageState extends State<InputPage> {
                   Expanded(
                     flex: 1,
                     child: MyContainer(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          RotatedBox(
-                            quarterTurns: 3,
-                            child: Text('BOY', style: kMetinStili),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          RotatedBox(
-                            quarterTurns: 3,
-                            child: Text(
-                              boy.toString(),
-                              style: kSayiStili,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              ButtonTheme(
-                                minWidth: 36,
-                                child: OutlinedButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      boy++;
-                                    });
-
-                                    print('ustteki buton basildi');
-                                  },
-                                  child: Icon(
-                                    Icons.add,
-                                    size: 20,
-                                  ),
-                                  style: OutlinedButton.styleFrom(
-                                    side: BorderSide(color: Colors.blue),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius
-                                          .zero, // Butonun köşeleri keskin olur
-                                    ),
-                                    minimumSize: Size(30, 30),
-                                  ),
-                                ),
-                              ),
-                              ButtonTheme(
-                                minWidth: 36,
-                                child: OutlinedButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      boy--;
-                                    });
-                                  },
-                                  child: Icon(
-                                    Icons.minimize,
-                                    size: 20,
-                                  ),
-                                  style: OutlinedButton.styleFrom(
-                                    side: BorderSide(color: Colors.blue),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.zero),
-                                    minimumSize: Size(30, 30),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
+                      child: buildRowOutlineButton('BOY'),
                     ),
                   ),
                   Expanded(
                     flex: 1,
                     child: MyContainer(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          RotatedBox(
-                            quarterTurns: 3,
-                            child: Text(
-                              'KİLO',
-                              style: kMetinStili,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          RotatedBox(
-                            quarterTurns: 3,
-                            child: Text(
-                              kilo.toString(),
-                              style: kSayiStili,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              ButtonTheme(
-                                minWidth: 36,
-                                child: OutlinedButton(
-                                  onPressed: () {},
-                                  child: Icon(Icons.add),
-                                  style: OutlinedButton.styleFrom(
-                                    side: BorderSide(color: Colors.lightBlue),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.zero),
-                                    minimumSize: Size(30, 30),
-                                  ),
-                                ),
-                              ),
-                              ButtonTheme(
-                                minWidth: 36,
-                                child: OutlinedButton(
-                                  onPressed: () {},
-                                  child: Icon(Icons.minimize_rounded),
-                                  style: OutlinedButton.styleFrom(
-                                    side: BorderSide(color: Colors.lightBlue),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.zero),
-                                    minimumSize: Size(30, 30),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
+                      child: buildRowOutlineButton('KİLO'),
                     ),
                   ),
                 ],
@@ -179,27 +56,36 @@ class _InputPageState extends State<InputPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(
-                      'Haftana Kaç Gün Spor Yapıyorsunuz?',
-                      style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        'Haftana Kaç Gün Spor Yapıyorsunuz?',
+                        style: TextStyle(
+                            color: Colors.black54,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
-                    Text(
-                      yapilanSpor.round().toString(),
-                      style: kSayiStili,
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        yapilanSpor.round().toString(),
+                        style: kSayiStili,
+                      ),
                     ),
-                    Slider(
-                      min: 0,
-                      max: 7,
-                      divisions: 7,
-                      value: yapilanSpor,
-                      onChanged: (double newValue) {
-                        setState(() {
-                          yapilanSpor = newValue;
-                        });
-                      },
+                    Expanded(
+                      flex: 1,
+                      child: Slider(
+                        min: 0,
+                        max: 7,
+                        divisions: 7,
+                        value: yapilanSpor,
+                        onChanged: (double newValue) {
+                          setState(() {
+                            yapilanSpor = newValue;
+                          });
+                        },
+                      ),
                     )
                   ],
                 ),
@@ -211,26 +97,35 @@ class _InputPageState extends State<InputPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(
-                      'Günde Kaç Sigara İçiyorsunuz?',
-                      style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        'Günde Kaç Sigara İçiyorsunuz?',
+                        style: TextStyle(
+                            color: Colors.black54,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
-                    Text(
-                      '${icilenSigara.round()}',
-                      style: kSayiStili,
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        '${icilenSigara.round()}',
+                        style: kSayiStili,
+                      ),
                     ),
-                    Slider(
-                        min: 0,
-                        max: 30,
-                        value: icilenSigara,
-                        onChanged: (double newValue) {
-                          setState(() {
-                            icilenSigara = newValue;
-                          });
-                        })
+                    Expanded(
+                      flex: 1,
+                      child: Slider(
+                          min: 0,
+                          max: 30,
+                          value: icilenSigara,
+                          onChanged: (double newValue) {
+                            setState(() {
+                              icilenSigara = newValue;
+                            });
+                          }),
+                    )
                   ],
                 ),
               ),
@@ -275,7 +170,101 @@ class _InputPageState extends State<InputPage> {
                 ],
               ),
             ),
+            ButtonTheme(
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ResultPage(UserData(
+                              kilo: kilo,
+                              boy: boy,
+                              seciliCinsiyet: seciliCinsiyet,
+                              yapilanSpor: yapilanSpor,
+                              icilenSigara: icilenSigara))));
+                },
+                child: Text(
+                  'HESAPLA',
+                  style: kMetinStili,
+                ),
+                style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.all(Colors.white)),
+              ),
+            ),
           ],
         ));
+  }
+
+  Row buildRowOutlineButton(String label) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        RotatedBox(
+          quarterTurns: 3,
+          child: Text(label, style: kMetinStili),
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        RotatedBox(
+          quarterTurns: 3,
+          child: Text(
+            label == 'BOY' ? boy.toString() : kilo.toString(),
+            style: kSayiStili,
+          ),
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ButtonTheme(
+              minWidth: 36,
+              child: OutlinedButton(
+                onPressed: () {
+                  setState(() {
+                    label == 'BOY' ? boy++ : kilo++;
+                  });
+                },
+                child: Icon(
+                  FontAwesomeIcons.plus,
+                  size: 10,
+                ),
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(color: Colors.blue),
+                  shape: RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.zero, // Butonun köşeleri keskin olur
+                  ),
+                  minimumSize: Size(30, 30),
+                ),
+              ),
+            ),
+            ButtonTheme(
+              minWidth: 36,
+              child: OutlinedButton(
+                onPressed: () {
+                  setState(() {
+                    label == 'BOY' ? boy-- : kilo--;
+                  });
+                },
+                child: Icon(
+                  FontAwesomeIcons.minus,
+                  size: 10,
+                ),
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(color: Colors.blue),
+                  shape:
+                      RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                  minimumSize: Size(30, 30),
+                ),
+              ),
+            ),
+          ],
+        )
+      ],
+    );
   }
 }
